@@ -1,6 +1,7 @@
 public class Supermarket {
 
-    private final PersonQueue queue = new SupermarketQueue();
+//    private final PersonQueue queue = new SupermarketQueue();
+    private final PersonQueue queue = new ArraySupermarketQueue();
     
     public void addPerson(Person person) {
 
