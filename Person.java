@@ -18,4 +18,11 @@ public interface Person {
      * @param message
      */
     void say(String message);
+	
+	/**
+	*	Get the age of the person
+	*
+	*
+	*/
+	int getAge();
 }
