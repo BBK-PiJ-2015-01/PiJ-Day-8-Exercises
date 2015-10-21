@@ -13,6 +13,7 @@ public class AgeOrderSupermarketQueue implements PersonQueue {
             headOfQueue = new QueuePerson(personToInsert);
             return;
         }
+		// Oldest person goes to the front of the queue
 		if (personToInsert.getAge() > headOfQueue.getAge()) {
 			QueuePerson oldHeadOfQueue = headOfQueue;
 			headOfQueue = new QueuePerson(personToInsert);
