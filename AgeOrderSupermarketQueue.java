@@ -13,7 +13,7 @@ public class AgeOrderSupermarketQueue implements PersonQueue {
             headOfQueue = new QueuePerson(personToInsert);
             return;
         }
-		if (personToInsert.getAge() > headOfQueue.getPerson().getAge()) {
+		if (personToInsert.getAge() > headOfQueue.getAge()) {
 			QueuePerson oldHeadOfQueue = headOfQueue;
 			headOfQueue = new QueuePerson(personToInsert);
 			headOfQueue.setNextPerson(oldHeadOfQueue);
@@ -43,7 +43,7 @@ public class AgeOrderSupermarketQueue implements PersonQueue {
         return headOfQueue == null ? 0 : headOfQueue.size();
     }
 
-    class QueuePerson {
+    class QueuePerson implements Person{
 
         private final Person person;
         //
@@ -56,7 +56,31 @@ public class AgeOrderSupermarketQueue implements PersonQueue {
             nextPerson = null;
             prevPerson = null;
         }
+		/**
+		* Implement person interface
+		*
+		*/
+		public void move(int distance) {
+			
+			if (person != null) {
+				person.move(distance);
+			}
+		}
 
+		public void say(String message) {
+			
+			if (person != null) {
+				person.say(message);
+			}
+		}
+	
+		public int getAge() {
+		
+			return person == null ? 0 : person.getAge();
+		}
+		//
+		//	End of Person interface
+		//
         public QueuePerson getNextPerson() {
             return nextPerson;
         }
@@ -75,12 +99,14 @@ public class AgeOrderSupermarketQueue implements PersonQueue {
 
         public void addPerson(QueuePerson personToAdd) {
 			
-            // Add Queue Person in front of a younger person
+            // 	Insert Queue Person in front of a younger person or 
+			//	at the end
             if (personToAdd == null) {
                 return;
-            }
-			Person personOfAge = personToAdd.getPerson();
-			if (nextPerson == null || nextPerson.getPerson().getAge() < personOfAge.getAge()) {
+            }			
+			if (nextPerson == null || nextPerson.getAge() < personToAdd.getAge()) {
+				
+				// Insert in front of the next person 					
 				if (nextPerson != null) {
 					personToAdd.setNextPerson(nextPerson);
 					nextPerson.setPrevPerson(personToAdd);
@@ -100,5 +126,4 @@ public class AgeOrderSupermarketQueue implements PersonQueue {
             return nextPerson == null ? 1 : nextPerson.size() + 1;
         }
     }
-
 }
